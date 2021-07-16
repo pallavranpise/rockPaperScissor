@@ -1,7 +1,36 @@
-function playerPlay(y) {
+let playerChoice;
+let computerChoice;
 
-    switch (y.toLowerCase()) {
+function computerPlay() {
+    number = (Math.floor(Math.random() * 3) + 1);
 
+    let hands = "";
+
+    switch (number) {
+        case 1:
+            hands = "rock";
+            break;
+        case 2:
+            hands = "paper";
+            break;
+        case 3:
+            hands = "scissor";
+            break;
+        default:
+            hands = "uiuiui";
+    };
+
+    console.log(`comp did ${hands}`);
+
+    return hands;
+};
+
+function playerPlay() {
+    let SIGN = prompt("type sign");
+    let sign = SIGN.toLowerCase();
+    let hands = "";
+
+    switch (sign) {
         case "rock":
             hands = "rock";
             break;
@@ -9,53 +38,45 @@ function playerPlay(y) {
             hands = "paper";
             break;
         case "scissor":
-            hands = "Scissor";
+            hands = "scissor";
             break;
-
         default:
-            hands = "roo";
+            hands = "retry";
+            console.log(`invalid sign ${SIGN } ${hands} `);
 
-    }
+    };
+
+    console.log(`player did ${hands}`);
+
     return hands;
 
 };
+
+function result(playerChoice, computerChoice) {
+
+    let match = "idk";
+
+    if (computerChoice == playerChoice) {
+        match = "tied";
+    } else
+    if ((computerChoice == "paper") && (playerChoice == "rock")) {
+        match = "lost";
+    } else
+    if ((computerChoice == "scissor") && (playerChoice == "paper")) {
+        match = "lost";
+    } else
+    if ((computerChoice == "rock") && (playerChoice == "scissor")) {
+        match = "lost";
+    } else {
+        match = "won";
+    };
+    console.log(`player ${match} against computer`);
+};
+
 
 document.getElementById("okay").onclick = function() {
-    let yourhand = prompt("type sign");
-    playerPlay(yourhand);
-    display(playerPlay());
-    display(computerPlay());
-    //result;
-};
 
-
-
-function computerPlay() {
-
-    switch (Math.floor(Math.random() * 3)) {
-
-        case 0:
-            hands = "rock";
-            break;
-        case 1:
-            hands = "paper";
-            break;
-        case 2:
-            hands = "Scissor";
-            break;
-
-    }
-    return hands;
-};
-
-
-function display(playerSign) {
-    if (playerSign == playerPlay()) {
-        console.log(`           you chose ${playerSign}`);
-    } else {
-        console.log(`       computer chose ${playerSign}`);
-    }
-
-
-
+    playerChoice = playerPlay();
+    computerChoice = computerPlay();
+    result(playerChoice, computerChoice);
 };
